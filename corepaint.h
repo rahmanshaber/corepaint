@@ -42,8 +42,8 @@ along with this program; if not, see {http://www.gnu.org/licenses/}. */
 #include <QSettings>
 #include <QShortcut>
 
-#include "utilities.h"
-#include "settingsmanage.h"
+#include <cprime/utilities.h>
+#include <cprime/settingsmanage.h>
 //#include "bookmarks/bookmarks.h"
 
 

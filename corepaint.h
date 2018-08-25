@@ -44,7 +44,7 @@ along with this program; if not, see {http://www.gnu.org/licenses/}. */
 
 #include <cprime/utilities.h>
 #include <cprime/settingsmanage.h>
-//#include "bookmarks/bookmarks.h"
+#include <cprime/bookmarkdialog.h>
 
 
 QT_BEGIN_NAMESPACE

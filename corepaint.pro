@@ -10,7 +10,7 @@ TARGET = corepaint
 TEMPLATE = app
 
 # library for theme
-unix:!macx: LIBS += /usr/lib/libcprime.a
+unix:!macx: LIBS += -lcprime
 
 FORMS += \
     corepaint.ui

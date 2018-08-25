@@ -24,7 +24,7 @@ corepaint::corepaint( QWidget *parent):QWidget(parent),ui(new Ui::corepaint),
     ui->setupUi(this);
 
     // set stylesheet from style.qrc
-    setStyleSheet(Utilities::getStylesheetFileContent(":/appStyle/style/CorePaint.qss"));
+    setStyleSheet(Utilities::getStylesheetFileContent(Utilities::StyleAppName::CorePaintStyle));
 
     // set window size
     int x = static_cast<int>(Utilities::screensize().width()  * .8);
@@ -334,11 +334,17 @@ bool corepaint::closeAllTabs()
         ImageArea *ia = getImageAreaByIndex(0);
         if(ia->getEdited())
         {
-            int ans = QMessageBox::warning(this, tr("Closing Tab..."),
-                                           tr("File has been modified.\nDo you want to save changes?"),
-                                           QMessageBox::Yes | QMessageBox::Default,
-                                           QMessageBox::No, QMessageBox::Cancel | QMessageBox::Escape);
-            switch(ans)
+//            QString msg = QString("This file contains unsaved changes.\nHow would you like to proceed?");
+//            QMessageBox message(QMessageBox::Question, QString("Save Changes"), msg,
+//                                QMessageBox::Yes | QMessageBox::Default,
+//                                QMessageBox::No, QMessageBox::Cancel | QMessageBox::Escape, this);
+//            message.setWindowIcon(QIcon(":/icons/CorePad.svg"));
+//            message.setStyleSheet(Utilities::getStylesheetFileContent(Utilities::StyleAppName::DialogStyle));
+
+//            int reply = message.exec();
+            int reply = 1;
+
+            switch(reply)
             {
             case QMessageBox::Yes:
                 if (ia->save())
@@ -470,6 +476,15 @@ void corepaint::on_paintTabs_tabCloseRequested(int index)
     ImageArea *ia = getImageAreaByIndex(index);
     if(ia->getEdited())
     {
+//        QString msg = QString("This file contains unsaved changes.\nHow would you like to proceed?");
+//        QMessageBox message(QMessageBox::Question, QString("Save Changes"), msg,
+//                            QMessageBox::Yes | QMessageBox::Default,
+//                            QMessageBox::No, QMessageBox::Cancel | QMessageBox::Escape, this);
+//        message.setWindowIcon(QIcon(":/icons/CorePad.svg"));
+//        message.setStyleSheet(Utilities::getStylesheetFileContent(Utilities::StyleAppName::DialogStyle));
+
+//        int reply = message.exec();
+
         int ans = QMessageBox::warning(this, tr("Closing Tab..."),
                                        tr("File has been modified.\nDo you want to save changes?"),
                                        QMessageBox::Yes | QMessageBox::Default,
@@ -578,7 +593,8 @@ void corepaint::on_bookMarkIt_clicked()
         QString mess = "File: " + workFilePath + "' not exists Or not saved";
         Utilities::messageEngine(mess, Utilities::MessageType::Info);
     } else {
-//        GlobalFunc::appEngines("BookMarkIt",workFilePath);
+        bookmarkDialog bk;
+        bk.callBookMarkDialog(this,workFilePath);
     }
 }
 

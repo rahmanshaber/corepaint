@@ -48,5 +48,6 @@
         <file>icons/selection.svg</file>
         <file>icons/delete.svg</file>
         <file>icons/resize.svg</file>
+        <file>icons/close.svg</file>
     </qresource>
 </RCC>

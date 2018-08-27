@@ -2,7 +2,7 @@
 Name=CorePaint
 Comment=CorePaint is paint app from CoreApps.
 Exec=corepaint %F
-Icon=/usr/share/icons/CoreApps/CorePaint.svg
+Icon=/usr/share/coreapps/icons/CorePaint.svg
 Type=Application
 Categories=Graphics;Viewer;Qt;Utility;
 Terminal=false

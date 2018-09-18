@@ -148,15 +148,15 @@ void corepaint::initializeNewTab(const bool &isOpen, const QString &filePath)
         }
 
         if (!fileName.isEmpty()) {
-            // Function from utilities.cpp
+            // Function from LibCPrime
             Utilities::messageEngine("File Opened Successfully.", Utilities::MessageType::Info);
         } else {
-            // Function from utilities.cpp
+            // Function from LibCPrime
             Utilities::messageEngine("File not Opened Successfully.", Utilities::MessageType::Info);
         }
     }
     else {
-        // Function from utilities.cpp
+        // Function from LibCPrime
         Utilities::messageEngine("Reached page limit.", Utilities::MessageType::Warning);
     }
 }
@@ -310,7 +310,7 @@ void corepaint::closeEvent(QCloseEvent *event)
     if(!isSomethingModified() || closeAllTabs())
     {
         event->ignore();
-        // Function from utilities.cpp
+        // Function from LibCPrime
         Utilities::saveToRecent("CorePaint", workFilePath);
         event->accept();
     }
@@ -337,7 +337,7 @@ bool corepaint::closeAllTabs()
             QString msg = QString("This file contains unsaved changes.\nHow would you like to proceed?");
             QMessageBox message(QMessageBox::Question, QString("Save Changes"), msg,
                                 QMessageBox::Yes | QMessageBox::Default | QMessageBox::No | QMessageBox::Cancel | QMessageBox::Escape, this);
-            message.setWindowIcon(QIcon(":/icons/CorePad.svg"));
+            message.setWindowIcon(QIcon(":/icons/CorePaint.svg"));
             message.setStyleSheet(Utilities::getStylesheetFileContent(Utilities::StyleAppName::DialogStyle));
 
             int reply = message.exec();
@@ -466,7 +466,7 @@ void corepaint::on_paintTabs_currentChanged(int index)
     }
 
     ui->workingOn->setText(ui->paintTabs->tabText(index));
-
+    this->setWindowTitle(ui->paintTabs->tabText(index) + " - CorePaint");
 }
 
 void corepaint::on_paintTabs_tabCloseRequested(int index)
@@ -478,7 +478,7 @@ void corepaint::on_paintTabs_tabCloseRequested(int index)
         QMessageBox message(QMessageBox::Question, QString("Save Changes"), msg,
                             QMessageBox::Yes | QMessageBox::Default |
                             QMessageBox::No | QMessageBox::Cancel | QMessageBox::Escape, this);
-        message.setWindowIcon(QIcon(":/icons/CorePad.svg"));
+        message.setWindowIcon(QIcon(":/icons/CorePaint.svg"));
         message.setStyleSheet(Utilities::getStylesheetFileContent(Utilities::StyleAppName::DialogStyle));
 
         int reply = message.exec();
@@ -525,10 +525,10 @@ void corepaint::on_save_clicked()
                                       tr("Untitled Image") : getCurrentImageArea()->getFileName() );
 
         workFilePath = getCurrentImageArea()->mFilePath;
-        // Function from utilities.cpp
+        // Function from LibCPrime
         Utilities::messageEngine("File Saved", Utilities::MessageType::Info);
     } else {
-        // Function from utilities.cpp
+        // Function from LibCPrime
         Utilities::messageEngine("File not Saved", Utilities::MessageType::Info);
     }
 }
@@ -540,10 +540,10 @@ void corepaint::on_saveas_clicked()
                                       tr("Untitled Image") : getCurrentImageArea()->getFileName() );
 
         workFilePath = getCurrentImageArea()->mFilePath;
-        // Function from utilities.cpp
+        // Function from LibCPrime
         Utilities::messageEngine("File Saved", Utilities::MessageType::Info);
     } else {
-        // Function from utilities.cpp
+        // Function from LibCPrime
         Utilities::messageEngine("File not Saved", Utilities::MessageType::Info);
     }
 }
@@ -583,7 +583,7 @@ void corepaint::on_zoomout_clicked()
 void corepaint::on_bookMarkIt_clicked()
 {
     if (!QFile(workFilePath).exists()) {
-        // Function from utilities.cpp
+        // Function from LibCPrime
         QString mess = "File: " + workFilePath + "' not exists Or not saved";
         Utilities::messageEngine(mess, Utilities::MessageType::Info);
     } else {

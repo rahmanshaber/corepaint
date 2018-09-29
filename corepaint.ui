@@ -15,7 +15,7 @@
   </property>
   <property name="windowIcon">
    <iconset resource="icons.qrc">
-    <normaloff>:/icons/CorePaint.svg</normaloff>:/icons/CorePaint.svg</iconset>
+    <normaloff>:/icons/corepaint.svg</normaloff>:/icons/corepaint.svg</iconset>
   </property>
   <property name="styleSheet">
    <string notr="true"/>
@@ -506,7 +506,7 @@
         </property>
         <property name="icon">
          <iconset resource="icons.qrc">
-          <normaloff>:/icons/CorePaint.svg</normaloff>:/icons/CorePaint.svg</iconset>
+          <normaloff>:/icons/corepaint.svg</normaloff>:/icons/corepaint.svg</iconset>
         </property>
         <property name="iconSize">
          <size>

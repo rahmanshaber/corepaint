@@ -97,10 +97,10 @@ unix {
         target.path = $$BINDIR
 
         desktop.path = $$PREFIX/share/applications/
-        desktop.files = "CorePaint.desktop"
+        desktop.files = "corepaint.desktop"
 
         icons.path = $$PREFIX/share/coreapps/icons/
-        icons.files = icons/CorePaint.svg
+        icons.files = icons/corepaint.svg
 
         INSTALLS += target icons desktop
 }

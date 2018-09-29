@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=CorePaint
+Comment=CorePaint is paint app from CoreApps.
+Exec=corepaint %F
+Icon=/usr/share/coreapps/icons/corepaint.svg
+Type=Application
+Categories=Utility;Qt;Viewer;Graphics;
+Terminal=false
+StartupNotify=true

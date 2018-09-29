@@ -1,7 +1,7 @@
 # CorePaint
 An app of CoreApps family.CorePaint is paint app.
 
-<img src="CorePaint.png" width="500">
+<img src="corepaint.png" width="500">
 
 ### Download
 

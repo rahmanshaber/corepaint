@@ -42,12 +42,12 @@
         <file>icons/undo.svg</file>
         <file>icons/zoom_in.svg</file>
         <file>icons/zoom_out.svg</file>
-        <file>icons/CorePaint.svg</file>
         <file>icons/new_page.svg</file>
         <file>icons/edit.svg</file>
         <file>icons/selection.svg</file>
         <file>icons/delete.svg</file>
         <file>icons/resize.svg</file>
         <file>icons/close.svg</file>
+        <file>icons/corepaint.svg</file>
     </qresource>
 </RCC>

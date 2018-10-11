@@ -337,7 +337,7 @@ bool corepaint::closeAllTabs()
             QString msg = QString("This file contains unsaved changes.\nHow would you like to proceed?");
             QMessageBox message(QMessageBox::Question, QString("Save Changes"), msg,
                                 QMessageBox::Yes | QMessageBox::Default | QMessageBox::No | QMessageBox::Cancel | QMessageBox::Escape, this);
-            message.setWindowIcon(QIcon(":/icons/CorePaint.svg"));
+            message.setWindowIcon(QIcon(":/icons/corepaint.svg"));
             message.setStyleSheet(Utilities::getStylesheetFileContent(Utilities::StyleAppName::DialogStyle));
 
             int reply = message.exec();
@@ -478,7 +478,7 @@ void corepaint::on_paintTabs_tabCloseRequested(int index)
         QMessageBox message(QMessageBox::Question, QString("Save Changes"), msg,
                             QMessageBox::Yes | QMessageBox::Default |
                             QMessageBox::No | QMessageBox::Cancel | QMessageBox::Escape, this);
-        message.setWindowIcon(QIcon(":/icons/CorePaint.svg"));
+        message.setWindowIcon(QIcon(":/icons/corepaint.svg"));
         message.setStyleSheet(Utilities::getStylesheetFileContent(Utilities::StyleAppName::DialogStyle));
 
         int reply = message.exec();

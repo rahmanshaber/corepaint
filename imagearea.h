@@ -52,7 +52,6 @@ along with this program; if not, see {http://www.gnu.org/licenses/}. */
 #include <QClipboard>
 #include <QMenu>
 
-#include <cprime/utilities.h>
 #include <cprime/settingsmanage.h>
 
 
@@ -65,38 +64,68 @@ class AbstractInstrument;
 class AbstractEffect;
 
 
-class ImageArea : public QWidget
-{
+class ImageArea : public QWidget {
     Q_OBJECT
 
 public:
-    explicit ImageArea(const bool &isOpen, const QString &filePath, QWidget *parent);
+    explicit ImageArea( const bool &isOpen, const QString &filePath, QWidget *parent );
     ~ImageArea();
 
     bool save();
     bool saveAs();
     void resizeImage();
     void resizeCanvas();
-    void rotateImage(bool flag);
+    void rotateImage( bool flag );
 
-    inline QString getFileName() { return (mFilePath.isEmpty() ? mFilePath :
-                                           mFilePath.split('/').last()); }
-    inline QImage* getImage() { return mImage; }
-    inline void setImage(const QImage &image) { *mImage = image; }
-    inline void setEdited(bool flag) { mIsEdited = flag; }
-    inline bool getEdited() { return mIsEdited; }
+    inline QString getFileName() {
+        return ( mFilePath.isEmpty() ? mFilePath :
+                 mFilePath.split( '/' ).last() );
+    }
+    inline QImage *getImage() {
+        return mImage;
+    }
+    inline QImage getImageCopy() {
+        return mImageCopy;
+    }
+    inline void setImage( const QImage &image ) {
+        *mImage = image;
+    }
+    inline void setEdited( bool flag ) {
+        mIsEdited = flag;
+    }
+    inline bool getEdited() {
+        return mIsEdited;
+    }
 
     void restoreCursor();
-    bool zoomImage(qreal factor);
-    inline void setZoomFactor(qreal factor) { mZoomFactor *= factor; }
-    inline qreal getZoomFactor() { return mZoomFactor; }
-    inline QUndoStack* getUndoStack() { return mUndoStack; }
-    inline void setIsPaint(bool isPaint) { mIsPaint = isPaint; }
-    inline bool isPaint() { return mIsPaint; }
-    inline void emitPrimaryColorView() { emit sendPrimaryColorView(); }
-    inline void emitSecondaryColorView() { emit sendSecondaryColorView(); }
-    inline void emitColor(QColor &color) { emit sendColor(color); }
-    inline void emitRestorePreviousInstrument() { emit sendRestorePreviousInstrument(); }
+    bool zoomImage( qreal factor );
+    inline void setZoomFactor( qreal factor ) {
+        mZoomFactor *= factor;
+    }
+    inline qreal getZoomFactor() {
+        return mZoomFactor;
+    }
+    inline QUndoStack *getUndoStack() {
+        return mUndoStack;
+    }
+    inline void setIsPaint( bool isPaint ) {
+        mIsPaint = isPaint;
+    }
+    inline bool isPaint() {
+        return mIsPaint;
+    }
+    inline void emitPrimaryColorView() {
+        emit sendPrimaryColorView();
+    }
+    inline void emitSecondaryColorView() {
+        emit sendSecondaryColorView();
+    }
+    inline void emitColor( QColor &color ) {
+        emit sendColor( color );
+    }
+    inline void emitRestorePreviousInstrument() {
+        emit sendRestorePreviousInstrument();
+    }
 
     void copyImage();
     void pasteImage();
@@ -104,14 +133,17 @@ public:
     void clearBackground();
     void saveImageChanges();
     void clearSelection();
-    void pushUndoCommand(UndoCommand *command);
+    void pushUndoCommand( UndoCommand *command );
 
     QString mFilePath; /** Path where located image. */
+
+public slots:
+    void enableCopyCut( bool enable );
 
 private:
     void initializeImage();
     void open();
-    void open(const QString &filePath);
+    void open( const QString &filePath );
     void drawCursor();
     void makeFormatsFilters();
 
@@ -125,27 +157,30 @@ private:
     QCursor *mCurrentCursor;
     qreal mZoomFactor;
     QUndoStack *mUndoStack;
-    QVector<AbstractInstrument*> mInstrumentsHandlers;
+    QVector<AbstractInstrument *> mInstrumentsHandlers;
     AbstractInstrument *mInstrumentHandler;
 
-    QMenu *contextMenu();
+    QAction *copyAct;
+    QAction *cutAct;
+    QAction *pasteAct;
+    QAction *delAct;
 
 signals:
     void sendPrimaryColorView();
     void sendSecondaryColorView();
-    void sendNewImageSize(const QSize&);
-    void sendCursorPos(const QPoint&);
-    void sendColor(const QColor&);
+    void sendNewImageSize( const QSize & );
+    void sendCursorPos( const QPoint & );
+    void sendColor( const QColor & );
     void sendRestorePreviousInstrument();
-    void sendSetInstrument(InstrumentsEnum);
-    void sendEnableCopyCutActions(bool enable);
-    void sendEnableSelectionInstrument(bool enable);
+    void sendSetInstrument( InstrumentsEnum );
+    void sendEnableCopyCutActions( bool enable );
+    void sendEnableSelectionInstrument( bool enable );
 
 protected:
-    void mousePressEvent(QMouseEvent *event);
-    void mouseMoveEvent(QMouseEvent *event);
-    void mouseReleaseEvent(QMouseEvent *event);
-    void paintEvent(QPaintEvent *event);
+    void mousePressEvent( QMouseEvent *event );
+    void mouseMoveEvent( QMouseEvent *event );
+    void mouseReleaseEvent( QMouseEvent *event );
+    void paintEvent( QPaintEvent *event );
 
 };
 

@@ -179,9 +179,9 @@ void SelectionInstrument::clearSelectionBackground(ImageArea &imageArea)
         mImageCopy = *imageArea.getImage();
         //
         // Changes at here those are not before //Abrar
-        imageArea.update();
-        mIsSelectionExists = false;
-        imageArea.restoreCursor();
+//        imageArea.update();
+//        mIsSelectionExists = false;
+//        imageArea.restoreCursor();
         //
     }
 }

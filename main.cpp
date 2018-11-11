@@ -21,61 +21,65 @@ along with this program; if not, see {http://www.gnu.org/licenses/}. */
 #include <QStyleFactory>
 #include <QCommandLineParser>
 
-#include <cprime/utilities.h>
+#include <cprime/cprime.h>
 #include <cprime/settingsmanage.h>
 
 
 void startSetup()
 {
-    QApplication::setStyle(QStyleFactory::create("Fusion"));
+    QApplication::setStyle( QStyleFactory::create( "Fusion" ) );
 
     // set the requried folders
-    Utilities::setupFileFolder(Utilities::FileFolderSetup::MimeFile);
+    CPrime::ValidityFunc::setupFileFolder( CPrime::FileFolderSetup::MimeFile );
 
     // if setting file not exist create one with defult
     SettingsManage sm;
     sm.createDefaultSettings();
 
     // set a icon across all the apps
-    QIcon::setThemeName(sm.getThemeName());
+    QIcon::setThemeName( sm.getThemeName() );
 
     // set one font style across all the apps
-    QFont fl (sm.getFontStyle(), 10, QFont::Normal);
-    QApplication::setFont(fl);
+    QFont fl ( sm.getFontStyle(), 10, QFont::Normal );
+    QApplication::setFont( fl );
 }
 
-int main(int argc, char *argv[])
+int main( int argc, char *argv[] )
 {
-    QApplication app(argc, argv);
-    app.setAttribute(Qt::AA_EnableHighDpiScaling);
-    app.setQuitOnLastWindowClosed(true);
+    QApplication app( argc, argv );
+    app.setAttribute( Qt::AA_EnableHighDpiScaling );
+    app.setQuitOnLastWindowClosed( true );
 
     startSetup();
 
     // Set application info
-    app.setOrganizationName("CoreBox");
-    app.setApplicationName("CorePaint");
+    app.setOrganizationName( "CoreBox" );
+    app.setApplicationName( "CorePaint" );
 
     QCommandLineParser parser;
     parser.addHelpOption();
     parser.addVersionOption();
 
     const QString files = "[FILE1, FILE2,...]";
-    parser.addPositionalArgument("files", files, files);
+    parser.addPositionalArgument( "files", files, files );
 
-    parser.process(app);
+    parser.process( app );
 
     QStringList args = parser.positionalArguments();
 
     QStringList paths;
-    foreach (QString arg, args) {
-      QFileInfo info(arg);
-      paths.push_back(info.absoluteFilePath());
+
+    foreach ( QString arg, args ) {
+        QFileInfo info( arg );
+        paths.push_back( info.absoluteFilePath() );
     }
+
     corepaint e;
-    if (paths.count()) {
-        e.sendFiles(paths);
+
+    if ( paths.count() ) {
+        e.sendFiles( paths );
     }
+
     e.show();
 
     return app.exec();

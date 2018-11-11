@@ -30,25 +30,23 @@ along with this program; if not, see {http://www.gnu.org/licenses/}. */
 #include <QDialogButtonBox>
 #include <QMessageBox>
 
-
-class TextDialog : public QDialog
-{
+class TextDialog : public QDialog {
     Q_OBJECT
 
 public:
-    explicit TextDialog(QString text, ImageArea *parent);
-   
+    explicit TextDialog( QString text, ImageArea *parent );
+
 private:
     void initializeGui();
     QTextEdit *mTextEdit;
-  
+
 signals:
-    void textChanged(ImageArea *, const QString);
-    void canceled(ImageArea *);
+    void textChanged( ImageArea *, const QString );
+    void canceled( ImageArea * );
 
 private slots:
     void textChanged();
-    void selectFont();    
+    void selectFont();
     void cancel();
     void reject();
 

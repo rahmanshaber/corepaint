@@ -17,8 +17,8 @@ along with this program; if not, see {http://www.gnu.org/licenses/}. */
 #include "undocommand.h"
 
 
-UndoCommand::UndoCommand(const QImage *img, ImageArea &imgArea, QUndoCommand *parent)
-    : QUndoCommand(parent), mPrevImage(*img), mImageArea(imgArea)
+UndoCommand::UndoCommand( const QImage *img, ImageArea &imgArea, QUndoCommand *parent )
+    : QUndoCommand( parent ), mPrevImage( *img ), mImageArea( imgArea )
 {
     mCurrImage = mPrevImage;
 }
@@ -26,15 +26,15 @@ UndoCommand::UndoCommand(const QImage *img, ImageArea &imgArea, QUndoCommand *pa
 void UndoCommand::undo()
 {
     mImageArea.clearSelection();
-    mCurrImage = *(mImageArea.getImage());
-    mImageArea.setImage(mPrevImage);
+    mCurrImage = *( mImageArea.getImage() );
+    mImageArea.setImage( mPrevImage );
     mImageArea.update();
     mImageArea.saveImageChanges();
 }
 
 void UndoCommand::redo()
 {
-    mImageArea.setImage(mCurrImage);
+    mImageArea.setImage( mCurrImage );
     mImageArea.update();
     mImageArea.saveImageChanges();
 }

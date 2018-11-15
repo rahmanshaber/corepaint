@@ -137,9 +137,6 @@ public:
 
     QString mFilePath; /** Path where located image. */
 
-public slots:
-    void enableCopyCut( bool enable );
-
 private:
     void initializeImage();
     void open();

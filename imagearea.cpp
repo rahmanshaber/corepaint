@@ -55,7 +55,7 @@ ImageArea::ImageArea( const bool &isOpen, const QString &filePath, QWidget *pare
     connect( selectionInstrument, SIGNAL( sendEnableCopyCutActions( bool ) ), this, SIGNAL( sendEnableCopyCutActions( bool ) ) );
     connect( selectionInstrument, SIGNAL( sendEnableSelectionInstrument( bool ) ), this, SIGNAL( sendEnableSelectionInstrument( bool ) ) );
 
-    connect( selectionInstrument, SIGNAL( sendEnableCopyCutActions( bool ) ), this, SLOT( enableCopyCut( bool ) ) );
+
     // Instruments handlers
     mInstrumentsHandlers.fill( nullptr, static_cast<int>( INSTRUMENTS_COUNT ) );
     mInstrumentsHandlers[CURSOR] = selectionInstrument;
@@ -69,28 +69,6 @@ ImageArea::ImageArea( const bool &isOpen, const QString &filePath, QWidget *pare
     mInstrumentsHandlers[COLORPICKER] = new ColorpickerInstrument( this );
     mInstrumentsHandlers[CURVELINE] = new CurveLineInstrument( this );
     mInstrumentsHandlers[TEXT] = new TextInstrument( this );
-
-    QMenu *popup = new QMenu( this );
-
-    copyAct = new QAction( "Copy", popup );
-    cutAct = new QAction( "Cut", popup );
-    pasteAct = new QAction( "Paste", popup );
-    delAct = new QAction( "Delete", popup );
-
-    popup->addAction( copyAct );
-    popup->addAction( cutAct );
-    popup->addAction( pasteAct );
-    popup->addAction( delAct );
-
-    connect( copyAct, &QAction::triggered, this, &ImageArea::copyImage );
-    connect( cutAct, &QAction::triggered, this, &ImageArea::cutImage );
-    connect( pasteAct, &QAction::triggered, this, &ImageArea::pasteImage );
-    connect( delAct, &QAction::triggered, this, &ImageArea::clearBackground );
-
-    this->setContextMenuPolicy( Qt::CustomContextMenu );
-    connect( this, &ImageArea::customContextMenuRequested, [this, popup]( const QPoint & pos ) {
-        popup->exec( this->mapToGlobal( pos ) );
-    } );
 }
 
 ImageArea::~ImageArea()
@@ -602,10 +580,4 @@ void ImageArea::pushUndoCommand( UndoCommand *command )
     if ( command != nullptr ) {
         mUndoStack->push( command );
     }
-}
-
-void ImageArea::enableCopyCut( bool enable )
-{
-    copyAct->setEnabled( enable );
-    cutAct->setEnabled( enable );
 }
